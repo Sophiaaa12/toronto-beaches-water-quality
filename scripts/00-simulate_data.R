@@ -1,12 +1,11 @@
 #### Preamble ####
-# Purpose: Simulates a dataset of Australian electoral divisions, including the 
-  #state and party that won each division.
-# Author: Rohan Alexander
-# Date: 26 September 2024
-# Contact: rohan.alexander@utoronto.ca
+# Purpose: Simulates a dataset of Toronto beach water quality observations.
+# Author: Siyi Zhu
+# Date: 26 September 2026
+# Contact: siyi.zhu@utoronto.ca
 # License: MIT
 # Pre-requisites: The `tidyverse` package must be installed
-# Any other information needed? Make sure you are in the `starter_folder` rproj
+# Any other information needed? Make sure you are in the `STA2453-assignment-1` rproj
 
 
 #### Workspace setup ####
@@ -15,37 +14,33 @@ set.seed(853)
 
 
 #### Simulate data ####
-# State names
-states <- c(
-  "New South Wales",
-  "Victoria",
-  "Queensland",
-  "South Australia",
-  "Western Australia",
-  "Tasmania",
-  "Northern Territory",
-  "Australian Capital Territory"
+# Beach names
+beaches <- c(
+  "Cherry Beach",
+  "Marie Curtis Park East Beach",
+  "Sunnyside Beach",
+  "Woodbine Beach"
 )
 
-# Political parties
-parties <- c("Labor", "Liberal", "Greens", "National", "Other")
+# Site names
+sites <- c(
+  "1W",
+  "2W",
+  "3W"
+)
 
-# Create a dataset by randomly assigning states and parties to divisions
 analysis_data <- tibble(
-  division = paste("Division", 1:151),  # Add "Division" to make it a character
-  state = sample(
-    states,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.25, 0.25, 0.15, 0.1, 0.1, 0.1, 0.025, 0.025) # Rough state population distribution
+  beachId = sample(1:4, size = 100, replace = TRUE),
+  beachName = sample(beaches, size = 100, replace = TRUE),
+  siteName = sample(sites, size = 100, replace = TRUE),
+  collectionDate = sample(
+    seq(as.Date("2026-06-01"), as.Date("2026-09-07"), by = "day"),
+    size = 100,
+    replace = TRUE
   ),
-  party = sample(
-    parties,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.40, 0.40, 0.05, 0.1, 0.05) # Rough party distribution
-  )
+  eColi = sample(1:200, size = 100, replace = TRUE)
 )
+
 
 
 #### Save data ####

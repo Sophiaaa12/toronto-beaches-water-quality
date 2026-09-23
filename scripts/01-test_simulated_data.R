@@ -1,14 +1,14 @@
 #### Preamble ####
-# Purpose: Tests the structure and validity of the simulated Australian 
-  #electoral divisions dataset.
-# Author: Rohan Alexander
-# Date: 26 September 2024
-# Contact: rohan.alexander@utoronto.ca
+# Purpose: Tests the structure and validity of the simulated Toronto beach
+  # water quality dataset.
+# Author: Siyi Zhu
+# Date: 26 September 2026
+# Contact: siyi.zhu@utoronto.ca
 # License: MIT
 # Pre-requisites: 
   # - The `tidyverse` package must be installed and loaded
   # - 00-simulate_data.R must have been run
-# Any other information needed? Make sure you are in the `starter_folder` rproj
+# Any other information needed? Make sure you are in the `STA2453-assignment-1` rproj
 
 
 #### Workspace setup ####
@@ -26,46 +26,60 @@ if (exists("analysis_data")) {
 
 #### Test data ####
 
-# Check if the dataset has 151 rows
-if (nrow(analysis_data) == 151) {
-  message("Test Passed: The dataset has 151 rows.")
+# Check if the dataset has 100 rows
+if (nrow(analysis_data) == 100) {
+  message("Test Passed: The dataset has 100 rows.")
 } else {
-  stop("Test Failed: The dataset does not have 151 rows.")
+  stop("Test Failed: The dataset does not have 100 rows.")
 }
 
-# Check if the dataset has 3 columns
-if (ncol(analysis_data) == 3) {
-  message("Test Passed: The dataset has 3 columns.")
+# Check if the dataset has 5 columns
+if (ncol(analysis_data) == 5) {
+  message("Test Passed: The dataset has 5 columns.")
 } else {
-  stop("Test Failed: The dataset does not have 3 columns.")
+  stop("Test Failed: The dataset does not have 5 columns.")
 }
 
-# Check if all values in the 'division' column are unique
-if (n_distinct(analysis_data$division) == nrow(analysis_data)) {
-  message("Test Passed: All values in 'division' are unique.")
+# Check if the 'beachName' column contains only valid beach names
+valid_beaches <- c(
+  "Cherry Beach",
+  "Marie Curtis Park East Beach",
+  "Sunnyside Beach",
+  "Woodbine Beach"
+)
+
+if (all(analysis_data$beachName %in% valid_beaches)) {
+  message("Test Passed: The 'beachName' column contains only valid beach names.")
 } else {
-  stop("Test Failed: The 'division' column contains duplicate values.")
+  stop("Test Failed: The 'beachName' column contains invalid beach names.")
 }
 
-# Check if the 'state' column contains only valid Australian state names
-valid_states <- c("New South Wales", "Victoria", "Queensland", "South Australia", 
-                  "Western Australia", "Tasmania", "Northern Territory", 
-                  "Australian Capital Territory")
+# Check if the 'siteName' column contains only valid site names
+valid_sites <- c("1W", "2W", "3W")
 
-if (all(analysis_data$state %in% valid_states)) {
-  message("Test Passed: The 'state' column contains only valid Australian state names.")
+if (all(analysis_data$siteName %in% valid_sites)) {
+  message("Test Passed: The 'siteName' column contains only valid site names.")
 } else {
-  stop("Test Failed: The 'state' column contains invalid state names.")
+  stop("Test Failed: The 'siteName' column contains invalid site names.")
 }
 
-# Check if the 'party' column contains only valid party names
-valid_parties <- c("Labor", "Liberal", "Greens", "National", "Other")
-
-if (all(analysis_data$party %in% valid_parties)) {
-  message("Test Passed: The 'party' column contains only valid party names.")
+# Check if the E. coli values are within the simulated range
+if (all(analysis_data$eColi >= 1 & analysis_data$eColi <= 200)) {
+  message("Test Passed: All E. coli values are within the expected range.")
 } else {
-  stop("Test Failed: The 'party' column contains invalid party names.")
+  stop("Test Failed: Some E. coli values are outside the expected range.")
 }
+
+# Check if collection dates are within the simulated period
+if (all(
+  analysis_data$collectionDate >= as.Date("2026-06-01") &
+  analysis_data$collectionDate <= as.Date("2026-09-07")
+)) {
+  message("Test Passed: All collection dates are within the expected period.")
+} else {
+  stop("Test Failed: Some collection dates are outside the expected period.")
+}
+
 
 # Check if there are any missing values in the dataset
 if (all(!is.na(analysis_data))) {
@@ -74,16 +88,18 @@ if (all(!is.na(analysis_data))) {
   stop("Test Failed: The dataset contains missing values.")
 }
 
-# Check if there are no empty strings in 'division', 'state', and 'party' columns
-if (all(analysis_data$division != "" & analysis_data$state != "" & analysis_data$party != "")) {
-  message("Test Passed: There are no empty strings in 'division', 'state', or 'party'.")
+
+# Check if there are no empty strings in character columns
+if (all(analysis_data$beachName != "" & analysis_data$siteName != "")) {
+  message("Test Passed: There are no empty strings in character columns.")
 } else {
-  stop("Test Failed: There are empty strings in one or more columns.")
+  stop("Test Failed: There are empty strings in one or more character columns.")
 }
 
-# Check if the 'party' column has at least two unique values
-if (n_distinct(analysis_data$party) >= 2) {
-  message("Test Passed: The 'party' column contains at least two unique values.")
+
+# Check if there are at least two beaches
+if (n_distinct(analysis_data$beachName) >= 2) {
+  message("Test Passed: The dataset contains at least two beaches.")
 } else {
-  stop("Test Failed: The 'party' column contains less than two unique values.")
+  stop("Test Failed: The dataset contains less than two beaches.")
 }
