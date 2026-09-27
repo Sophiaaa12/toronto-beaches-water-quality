@@ -1,16 +1,44 @@
+@misc{torontobeaches,
+  author = {{City of Toronto}},
+  title = {Toronto Beaches Water Quality},
+  publisher = {City of Toronto Open Data},
+  url = {https://open.toronto.ca/dataset/toronto-beaches-water-quality/},
+  note = {Accessed 2026-09-25}
+}
+
+@techreport{healthcanada,
+  author = {{Health Canada}},
+  title = {Guidelines for Canadian Recreational Water Quality: Microbiological Sampling and Analysis},
+  institution = {Health Canada},
+  year = {2023},
+  type = {Guideline Technical Document for Public Consultation},
+  url = {https://www.canada.ca/content/dam/hc-sc/documents/programs/consultation-guidelines-canadian-recreational-water-quality-microbiological-sampling-analysis/document/document-en.pdf}
+}
+
+@article {Young2026,
+	author = {Young, Ian and Jardine, Rachel and Desta, Binyam N. and Edge, Thomas A. and Saleem, Faizan and Pearl, David L. and Majowicz, Shannon E. and Brooks, Teresa and Nesbitt, Andrea and Sanchez, J. Johanna and Schellhorn, Herb E. and Elton, Sarah and Schwandt, Michael and Lyng, Dylan and Krupa, Brandon and Montgomery, Elizabeth and Patel, Mahesh and Tustin, Jordan},
+	title = {The associations between recreational water contact, water quality measures, and acute gastrointestinal illness among Canadian beachgoers: a prospective cohort study},
+	elocation-id = {2026.04.01.26349959},
+	year = {2026},
+	doi = {10.64898/2026.04.01.26349959},
+	publisher = {Cold Spring Harbor Laboratory Press},
+	abstract = {Background Beaches are popular summertime destinations in Canada. However, they can be affected by specific fecal pollution sources, increasing the risk of recreational water illness.Objectives This study was conducted to determine the risks of acute gastrointestinal illness (AGI) among Canadian beachgoers and to evaluate the influence of different fecal indicator bacteria (FIB) and other water quality measures on assessing these risks.Methods In a prospective cohort design, beachgoers were recruited at sites across Canada from 2023 to 2025. Sociodemographic characteristics and exposures were determined through an on-site survey, with a 7-day follow-up survey to determine risks of AGI. Bayesian mixed-effects logistic regression models were fitted to evaluate the effects of an ordinal water contact variable (no contact, minimal contact, body immersion, and swallowed water) on the incident risk of AGI, with an interaction included for water quality indicators. The levels of six FIB and water quality measures were assessed: Escherichia coli, enterococci DNA, three microbial source tracking DNA markers (human HF183/BacR287, human mitochondria, seagull Gull4), and turbidity.Results A total of 4085 participants were recruited, with 67.6\% completing the follow-up survey. The overall incident risk of AGI was 2.6\%. Both swallowing water and body immersion increased AGI risks compared to no water contact: median of 20 excess cases (95\% Credible Interval [CrI]: 4, 64) and 5 excess cases (95\% CrI: 1, 19) of AGI predicted per 1000 beachgoers, respectively. Escherichia coli and seagull DNA marker levels were associated with AGI among those who had water contact, particularly among those who reported swallowing water.Discussion While the overall burden of AGI due to beach water contact in Canada was low, increased risks are associated with E. coli levels particularly among those who swallow water. This could be related to fecal contamination from seagulls. However, there is substantial uncertainty in the predicted effect sizes.Competing Interest StatementThe authors have declared no competing interest.Clinical Protocols https://doi.org/10.1186/s12889-024-19889-6 Funding StatementThis work was supported by the Canadian Institutes of Health Research (CIHR), grant numbers PJT 185894 and PJT 192023 (P.I. Young)Author DeclarationsI confirm all relevant ethical guidelines have been followed, and any necessary IRB and/or ethics committee approvals have been obtained.YesThe details of the IRB/oversight body that provided approval or exemption for the research described are given below:The Toronto Metropolitan University Research Ethics Board gave ethical approval for this work (REB$\#$ 2023-043).I confirm that all necessary patient/participant consent has been obtained and the appropriate institutional forms have been archived, and that any patient/participant/sample identifiers included were not known to anyone (e.g., hospital staff, patients or participants themselves) outside the research group so cannot be used to identify individuals.YesI understand that all clinical trials and any other prospective interventional studies must be registered with an ICMJE-approved registry, such as ClinicalTrials.gov. I confirm that any such study reported in the manuscript has been registered and the trial registration ID is provided (note: if posting a prospective study registered retrospectively, please provide a statement in the trial ID field explaining why the study was not registered in advance).YesI have followed all appropriate research reporting guidelines, such as any relevant EQUATOR Network research reporting checklist(s) and other pertinent material, if applicable.YesAll data produced in the present study are available upon reasonable request to the authors https://github.com/iany33/Beach_cohort_AGI},
+	URL = {https://www.medrxiv.org/content/early/2026/04/03/2026.04.01.26349959},
+	eprint = {https://www.medrxiv.org/content/early/2026/04/03/2026.04.01.26349959.full.pdf},
+	journal = {medRxiv}
+}
 
 
-@Manual{citeR,
-    title = {{R: A Language and Environment for Statistical Computing}},
+@Manual{R,
+    title = {R: A Language and Environment for Statistical Computing},
     author = {{R Core Team}},
     organization = {R Foundation for Statistical Computing},
     address = {Vienna, Austria},
-    year = {2023},
+    year = {2024},
     url = {https://www.R-project.org/},
   }
-  
-  
-@Article{thereferencecanbewhatever,
+
+@Article{tidyverse,
     title = {Welcome to the {tidyverse}},
     author = {Hadley Wickham and Mara Averick and Jennifer Bryan and Winston Chang and Lucy D'Agostino McGowan and Romain François and Garrett Grolemund and Alex Hayes and Lionel Henry and Jim Hester and Max Kuhn and Thomas Lin Pedersen and Evan Miller and Stephan Milton Bache and Kirill Müller and Jeroen Ooms and David Robinson and Dana Paige Seidel and Vitalie Spinu and Kohske Takahashi and Davis Vaughan and Claus Wilke and Kara Woo and Hiroaki Yutani},
     year = {2019},
@@ -19,61 +47,31 @@
     number = {43},
     pages = {1686},
     doi = {10.21105/joss.01686},
-  }  
-  
-  
-@Manual{citeLahman,
-    title = {{Lahman: Sean `Lahman' Baseball Database}},
-    author = {Michael Friendly and Chris Dalzell and Martin Monkman and Dennis Murphy},
-    year = {2020},
-    note = {R package version 8.0-0},
-    url = {https://CRAN.R-project.org/package=Lahman},
-  }  
-  
-  
-@article{gebru2021datasheets,
-  title={Datasheets for datasets},
-  author={Gebru, Timnit and Morgenstern, Jamie and Vecchione, Briana and Vaughan, Jennifer Wortman and Wallach, Hanna and Iii, Hal Daum{\'e} and Crawford, Kate},
-  journal={Communications of the ACM},
-  volume={64},
-  number={12},
-  pages={86--92},
-  year={2021},
-  publisher={ACM New York, NY, USA}
 }
 
-@Misc{rstanarm,
-    title = {{rstanarm: {Bayesian} applied regression modeling via {Stan}}},
-    author = {Ben Goodrich and Jonah Gabry and Imad Ali and Sam Brilleman},
-    note = {R package version 2.21.3},
-    year = {2022},
-    url = {https://mc-stan.org/rstanarm/},
-  }
-  
-@Manual{palmerpenguins,
-    title = {{palmerpenguins: Palmer Archipelago (Antarctica) penguin data}},
-    author = {Allison Marie Horst and Alison Presmanes Hill and Kristen B Gorman},
-    year = {2020},
-    note = {R package version 0.1.0},
-    doi = {10.5281/zenodo.3960218},
-    url = {https://allisonhorst.github.io/palmerpenguins/},
-  }
-  
-  
-@book{tellingstories,
-    title = {Telling Stories with Data},
-    author = {Rohan Alexander},
-    year = {2023},
-    publisher = {Chapman; Hall/CRC},
-    url = {https://tellingstorieswithdata.com/}
-  }  
-  
-  
+@Book{ggplot,
+    author = {Hadley Wickham},
+    title = {ggplot2: Elegant Graphics for Data Analysis},
+    publisher = {Springer-Verlag New York},
+    year = {2016},
+    isbn = {978-3-319-24277-4},
+    url = {https://ggplot2.tidyverse.org},
+}
 
-@Manual{shelter,
-    title = {Deaths of Shelter Residents},
-    author = {{Toronto Shelter & Support Services}},
-    year = {2024},
-    note = {As accessed 2024-10-02.},
-    url = {https://open.toronto.ca/dataset/deaths-of-shelter-residents/},
-  }  
+
+@Manual{tinytable,
+    title = {tinytable: Simple and Configurable Tables in 'HTML', 'LaTeX', 'Markdown',
+'Word', 'PNG', 'PDF', and 'Typst' Formats},
+    author = {Vincent Arel-Bundock},
+    year = {2026},
+    note = {R package version 0.17.0},
+    url = {https://CRAN.R-project.org/package=tinytable},
+}
+
+@Manual{here,
+    title = {here: A Simpler Way to Find Your Files},
+    author = {Kirill Müller},
+    year = {2020},
+    note = {R package version 1.0.1},
+    url = {https://CRAN.R-project.org/package=here},
+  }

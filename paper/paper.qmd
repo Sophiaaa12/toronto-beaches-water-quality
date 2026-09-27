@@ -1,14 +1,16 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Variation in E. coli Measurements at Toronto Beaches"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: [https://github.com/RohanAlexander/starter_folder](https://github.com/RohanAlexander/starter_folder)."
+  - Siyi Zhu
+thanks: "Code and data are available at: https://github.com/Sophiaaa12/STA2453-assignment-1."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
-format: pdf
+abstract: "This paper examines variation in E. coli measurements at Toronto beaches using 102,534 observations collected from 2007 to 2026. The measurements are strongly right-skewed, with most observations concentrated at relatively low values and a small number of extremely high values. E. coli measurements also differ across beaches, with Sunnyside Beach and Marie Curtis Park East Beach generally having higher values than several other beaches. Measurements vary over time, but there is no clear sustained upward or downward pattern over the study period."
+format:
+  pdf:
+    include-in-header:
+      text: |
+        \usepackage{float}
 number-sections: true
 bibliography: references.bib
 ---
@@ -19,241 +21,364 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
+library(tinytable)
+analysis_data <- read_csv(here::here("data/02-analysis_data/analysis_data.csv"))
 ```
-
 
 # Introduction
 
-Overview paragraph
+Toronto’s public beaches provide important recreational spaces during the summer swimming season, but water quality can vary across locations and over time. One commonly used indicator of recreational water quality is the concentration of *Escherichia coli* (E. coli), which is monitored by Toronto Public Health to assess conditions at supervised beaches [@torontobeaches]. E. coli is also used as an indicator of fecal contamination in recreational fresh water [@healthcanada]. Understanding how E. coli measurements are distributed and how they differ across beaches and over time can provide insight into variation in recreational water quality across Toronto.
 
-Estimand paragraph
+Using Toronto Beaches Water Quality data from 2007 to 2026, this paper examines the distribution of E. coli measurements across Toronto beaches. The measurements are strongly right-skewed: most observations are concentrated at relatively low values, while a small number are extremely high. Measurements also differ across beaches, with Sunnyside Beach and Marie Curtis Park East Beach generally having higher values than several other beaches.
 
-Results paragraph
+These patterns matter because E. coli is used to assess recreational water quality. Recent Canadian research has also examined the relationship between E. coli levels and acute gastrointestinal illness among beachgoers [@Young2026]. Examining the overall distribution of measurements and differences across beaches and over time provides a more complete description of the water-quality data and highlights the substantial variation present in the observations.
 
-Why it matters paragraph
-
-Telegraphing paragraph: The remainder of this paper is structured as follows. @sec-data....
-
-
-
-
-
+The remainder of this paper is structured as follows. @sec-data describes the Toronto Beaches Water Quality dataset, explains how the E. coli measurements are collected and recorded, and examines their overall distribution and variation across beaches and over time.
 
 # Data {#sec-data}
 
 ## Overview
 
-We use the statistical programming language R [@citeR].... Our data [@shelter].... Following @tellingstories, we consider...
+The Toronto Beaches Water Quality dataset is provided through the City of Toronto Open Data Portal [@torontobeaches]. During the summer swimming season, the City collects water samples from supervised public beaches, and Toronto Public Health analyzes the samples for E. coli as part of its monitoring of beach water quality [@torontobeaches]. These measurements provide information used to assess recreational water conditions at Toronto beaches.
 
-Overview text
+The data used in this analysis contain 102,534 observations collected between June 3, 2007 and September 16, 2026 across 10 Toronto beaches. Each observation records a beach identifier, beach name, sampling site, collection date, and E. coli measurement. The original dataset also contains an observation identifier and geographic information, which are not required for this analysis and were removed during data cleaning. The analysis was conducted using R [@R], the `tidyverse` [@tidyverse], and the `here` package [@here]. Figures were produced using `ggplot2` [@ggplot], and tables were produced using `tinytable` [@tinytable].
 
 ## Measurement
-	
-Some paragraphs about how we go from a phenomena in the world to an entry in the dataset.
 
-## Outcome variables
+Each row in the analysis data represents an E. coli measurement from a particular sampling site at a Toronto beach on a particular collection date. Multiple observations can be recorded for the same beach and date because samples are collected at different sites. Therefore, an observation should not be interpreted as the overall water quality of an entire beach on that day. E. coli is used by Toronto Public Health as an indicator when monitoring recreational water quality [@torontobeaches].
 
-Add graphs, tables and text. Use sub-sub-headings for each outcome variable or update the subheading to be singular.
-
-
-
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+@tbl-data-summary summarizes the distribution and the number of missings of E. coli measurements in the analysis data. The measurements are strongly right-skewed, with a median of 20 and a mean of approximately 154. The largest recorded value is 6,191,768, illustrating the presence of extreme observations. Because the mean is sensitive to these unusually large values, the median provides a more representative description of a typical observation. In addition, 3,543 E. coli measurements are missing. These observations are retained in the cleaned dataset and excluded only from calculations or visualizations that require an observed E. coli value.
 
 ```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
-
-Talk more about it.
-
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
+#| label: tbl-data-summary
+#| tbl-cap: "Summary of E. coli measurements in the analysis data"
 #| echo: false
 #| warning: false
 #| message: false
 
-analysis_data <- read_csv(here::here("data/02-analysis_data/analysis_data.csv"))
-
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
-```
-
-Talk way more about it. 
-
-## Predictor variables
-
-Add graphs, tables and text.
-
-Use sub-sub-headings for each outcome variable and feel free to combine a few into one if they go together naturally.
-
-
-
-
-
-
-
-
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
-
-## Model set-up
-
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
-
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
-
-# Results
-
-Our results are summarized in @tbl-modelresults.
-
-```{r}
-#| echo: false
-#| eval: true
-#| warning: false
-#| message: false
-
-library(rstanarm)
-
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
-```
-
-```{r}
-#| echo: false
-#| eval: true
-#| label: tbl-modelresults
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
-#| warning: false
-
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
+data_summary <- tibble(
+  Statistic = c(
+    "Number of observations",
+    "Number of beaches",
+    "Median E. coli",
+    "Mean E. coli",
+    "Minimum E. coli",
+    "Maximum E. coli",
+    "Missing E. coli"
   ),
-  statistic = "mad",
-  fmt = 2
-)
+  Value = c(
+    format(nrow(analysis_data), big.mark = ","),
+    n_distinct(analysis_data$beachName),
+    median(analysis_data$eColi, na.rm = TRUE),
+    round(mean(analysis_data$eColi, na.rm = TRUE)),
+    min(analysis_data$eColi, na.rm = TRUE),
+    format(max(analysis_data$eColi, na.rm = TRUE), big.mark = ","),
+    format(sum(is.na(analysis_data$eColi)), big.mark = ",")
+    )
+  )
+
+tt(data_summary)
 ```
 
+There are limited direct privacy concerns because the dataset contains environmental measurements rather than information about individuals. However, the measurements have public-health relevance and should therefore be interpreted carefully. Individual site-level observations are not classified as “safe” or “unsafe” in this analysis because they do not necessarily represent the water quality of an entire beach.
 
+## Data exploration
 
+### Overall distribution
 
-# Discussion
-
-## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
-
-## Second discussion point
-
-Please don't use these as sub-heading labels - change them to be what your point actually is.
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
-
-\newpage
-
-\appendix
-
-# Appendix {-}
-
-
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
+The overall distribution of E. coli measurements is strongly right-skewed, as shown in @fig-ecoli-distribution. Most observations are concentrated at relatively low values, while progressively fewer observations occur at higher values. A logarithmic scale is used on the horizontal axis so that the large range of observed values can be displayed more clearly.
 
 ```{r}
-#| eval: true
+#| label: fig-ecoli-distribution
+#| fig-cap: "Overall distribution of E. coli measurements up to 10,000"
 #| echo: false
-#| message: false
 #| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
+#| message: false
+#| fig-width: 7
+#| fig-height: 5
+#| out-width: "85%"
+#| fig-align: center
+#| fig-pos: H
 
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
+analysis_data |>
+  filter(
+    !is.na(eColi),
+    eColi <= 10000
+  ) |>
+  ggplot(aes(x = eColi)) +
+  geom_histogram(
+    bins = 50
+  ) +
+  scale_x_log10() +
+  labs(
+    x = "E. coli measurement (log scale)",
+    y = "Number of observations"
+  ) +
+  theme_minimal()
 ```
 
-## Diagnostics
+@fig-ecoli-distribution displays measurements up to 10,000 so that the distribution of the large majority of observations remains visible. Measurements above this value are retained in the analysis data and are included in the numerical summaries in @tbl-data-summary. The concentration of observations at lower values together with a long upper tail is consistent with the large difference between the median and mean reported in @tbl-data-summary. This skewness also means that a small number of unusually high measurements can have a substantial influence on the mean, making the median more informative for describing a typical observation.
 
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
 
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
+### Variation across beaches
+
+E. coli measurements differ across Toronto beaches, as shown in @fig-beach-distribution. Each point represents an individual E. coli measurement, and a logarithmic scale is used to display the wide range of observed values more clearly.
 
 ```{r}
+#| label: fig-beach-distribution
+#| fig-cap: "E. coli measurements across Toronto beaches"
 #| echo: false
-#| eval: true
-#| message: false
 #| warning: false
-#| label: fig-stanareyouokay
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
+#| message: false
+#| fig-width: 7
+#| fig-height: 5
+#| out-width: "90%"
+#| fig-align: center
+#| fig-pos: H
 
-plot(first_model, "trace")
-
-plot(first_model, "rhat")
+analysis_data |>
+  filter(!is.na(eColi)) |>
+  ggplot(
+    aes(
+      x = reorder(beachName, eColi, FUN = median),
+      y = eColi
+    )
+  ) +
+  geom_jitter(
+    alpha = 0.08,
+    width = 0.2,
+    size = 0.4
+  ) +
+  scale_y_log10() +
+  coord_flip() +
+  labs(
+    x = "Beach",
+    y = "E. coli measurement (log scale)"
+  ) +
+  theme_minimal()
 ```
 
+@fig-beach-distribution shows substantial variation both across beaches and among observations from the same beach. Sunnyside Beach and Marie Curtis Park East Beach have more observations extending into higher E. coli values, while several other beaches have measurements more concentrated at lower values. However, the measurements overlap considerably across beaches, and relatively high values can be observed at all beaches. This suggests that differences across beaches are present, but there is also substantial variation within individual beaches.
 
 
-\newpage
+### Variation over time
 
+E. coli measurements also vary over time, as shown in @fig-time-distribution. Each point represents an individual E. coli measurement collected between 2007 and 2026. A logarithmic scale is again used to display the wide range of observed values more clearly.
+
+```{r}
+#| label: fig-time-distribution
+#| fig-cap: "E. coli measurements over time"
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 7
+#| fig-height: 5
+#| out-width: "90%"
+#| fig-align: center
+#| fig-pos: H
+
+analysis_data |>
+  filter(!is.na(eColi)) |>
+  ggplot(aes(
+    x = collectionDate,
+    y = eColi
+  )) +
+  geom_point(
+    alpha = 0.08,
+    size = 0.4
+  ) +
+  scale_y_log10() +
+  labs(
+    x = "Collection date",
+    y = "E. coli measurement (log scale)"
+  ) +
+  theme_minimal()
+```
+
+@fig-time-distribution shows substantial variation in E. coli measurements throughout the study period. Most observations are concentrated at relatively low values, while higher measurements occur in each year. An especially extreme observation occurs in 2009. Overall, there is no clear sustained upward or downward pattern in the observed measurements over time.
+
+<!-- ## Outcome variables -->
+
+<!-- Add graphs, tables and text. Use sub-sub-headings for each outcome variable or update the subheading to be singular. -->
+
+<!-- Some of our data is of penguins (@fig-bills), from @palmerpenguins. -->
+
+<!-- ```{r} -->
+<!-- #| label: fig-bills -->
+<!-- #| fig-cap: Bills of penguins -->
+<!-- #| echo: false -->
+
+<!-- ggplot(penguins, aes(x = island, fill = species)) + -->
+<!--   geom_bar(alpha = 0.8) + -->
+<!--   scale_fill_manual(values = c("darkorange","purple","cyan4"), -->
+<!--                     guide = "none") + -->
+<!--   theme_minimal() + -->
+<!--   facet_wrap(~species, ncol = 1) + -->
+<!--   coord_flip() -->
+<!-- ``` -->
+
+<!-- Talk more about it. -->
+
+<!-- And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.) -->
+
+<!-- ```{r} -->
+<!-- #| label: fig-planes -->
+<!-- #| fig-cap: Relationship between wing length and width -->
+<!-- #| echo: false -->
+<!-- #| warning: false -->
+<!-- #| message: false -->
+
+<!-- analysis_data <- read_csv(here::here("data/02-analysis_data/analysis_data.csv")) -->
+
+<!-- analysis_data |> -->
+<!--   ggplot(aes(x = width, y = length)) + -->
+<!--   geom_point(alpha = 0.8) + -->
+<!--   theme_minimal() + -->
+<!--   labs(x = "Wing width (mm)", -->
+<!--        y = "Wing length (mm)") -->
+<!-- ``` -->
+
+<!-- Talk way more about it. -->
+
+<!-- ## Predictor variables -->
+
+<!-- Add graphs, tables and text. -->
+
+<!-- Use sub-sub-headings for each outcome variable and feel free to combine a few into one if they go together naturally. -->
+
+<!-- # Model -->
+
+<!-- The goal of our modelling strategy is twofold. Firstly,... -->
+
+<!-- Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details]. -->
+
+<!-- ## Model set-up -->
+
+<!-- Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters. -->
+
+<!-- \begin{align} -->
+<!-- y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\ -->
+<!-- \mu_i &= \alpha + \beta_i + \gamma_i\\ -->
+<!-- \alpha &\sim \mbox{Normal}(0, 2.5) \\ -->
+<!-- \beta &\sim \mbox{Normal}(0, 2.5) \\ -->
+<!-- \gamma &\sim \mbox{Normal}(0, 2.5) \\ -->
+<!-- \sigma &\sim \mbox{Exponential}(1) -->
+<!-- \end{align} -->
+
+<!-- We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`. -->
+
+<!-- ### Model justification -->
+
+<!-- We expect a positive relationship between the size of the wings and time spent aloft. In particular... -->
+
+<!-- We can use maths by including latex between dollar signs, for instance $\theta$. -->
+
+<!-- # Results -->
+
+<!-- Our results are summarized in @tbl-modelresults. -->
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| eval: true -->
+<!-- #| warning: false -->
+<!-- #| message: false -->
+
+<!-- library(rstanarm) -->
+
+<!-- first_model <- -->
+<!--   readRDS(file = here::here("models/first_model.rds")) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| eval: true -->
+<!-- #| label: tbl-modelresults -->
+<!-- #| tbl-cap: "Explanatory models of flight time based on wing width and wing length" -->
+<!-- #| warning: false -->
+
+<!-- modelsummary::modelsummary( -->
+<!--   list( -->
+<!--     "First model" = first_model -->
+<!--   ), -->
+<!--   statistic = "mad", -->
+<!--   fmt = 2 -->
+<!-- ) -->
+<!-- ``` -->
+
+<!-- # Discussion -->
+
+<!-- ## First discussion point {#sec-first-point} -->
+
+<!-- If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. -->
+
+<!-- ## Second discussion point -->
+
+<!-- Please don't use these as sub-heading labels - change them to be what your point actually is. -->
+
+<!-- ## Third discussion point -->
+
+<!-- ## Weaknesses and next steps -->
+
+<!-- Weaknesses and next steps should also be included. -->
+
+<!-- \newpage -->
+
+<!-- \appendix -->
+
+<!-- # Appendix {.unnumbered} -->
+
+<!-- # Additional data details -->
+
+<!-- # Model details {#sec-model-details} -->
+
+<!-- ## Posterior predictive check -->
+
+<!-- In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows... -->
+
+<!-- In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... -->
+
+<!-- ```{r} -->
+<!-- #| eval: true -->
+<!-- #| echo: false -->
+<!-- #| message: false -->
+<!-- #| warning: false -->
+<!-- #| label: fig-ppcheckandposteriorvsprior -->
+<!-- #| layout-ncol: 2 -->
+<!-- #| fig-cap: "Examining how the model fits, and is affected by, the data" -->
+<!-- #| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"] -->
+
+<!-- pp_check(first_model) + -->
+<!--   theme_classic() + -->
+<!--   theme(legend.position = "bottom") -->
+
+<!-- posterior_vs_prior(first_model) + -->
+<!--   theme_minimal() + -->
+<!--   scale_color_brewer(palette = "Set1") + -->
+<!--   theme(legend.position = "bottom") + -->
+<!--   coord_flip() -->
+<!-- ``` -->
+
+<!-- ## Diagnostics -->
+
+<!-- @fig-stanareyouokay-1 is a trace plot. It shows... This suggests... -->
+
+<!-- @fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests... -->
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| eval: true -->
+<!-- #| message: false -->
+<!-- #| warning: false -->
+<!-- #| label: fig-stanareyouokay -->
+<!-- #| fig-cap: "Checking the convergence of the MCMC algorithm" -->
+<!-- #| fig-subcap: ["Trace plot", "Rhat plot"] -->
+<!-- #| layout-ncol: 2 -->
+
+<!-- plot(first_model, "trace") -->
+
+<!-- plot(first_model, "rhat") -->
+<!-- ``` -->
+
+<!-- \newpage -->
 
 # References
-
-
