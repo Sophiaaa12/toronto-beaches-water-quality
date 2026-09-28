@@ -5,7 +5,7 @@
 # Contact: siyi.zhu@utoronto.ca
 # License: MIT
 # Pre-requisites: The `tidyverse` package must be installed
-# Any other information needed? Make sure you are in the `STA2453-assignment-1` rproj
+# Any other information needed? Make sure you are in the `toronto-beaches-water-quality` rproj
 
 
 #### Workspace setup ####

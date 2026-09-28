@@ -7,7 +7,7 @@
 # License: MIT
 # Pre-requisites:
 # - The `opendatatoronto` and `tidyverse` packages must be installed
-# Make sure you are in the STA2453-assignment-1` rproj
+# Make sure you are in the `toronto-beaches-water-quality` rproj
 
 #### Workspace setup ####
 library(opendatatoronto)

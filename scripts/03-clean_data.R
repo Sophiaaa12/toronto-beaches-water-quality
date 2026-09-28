@@ -7,7 +7,7 @@
 # Pre-requisites:
 # - The `tidyverse` package must be installed
 # - 02-download_data.R must have been run
-# Make sure you are in the `STA2453-assignment-1` rproj
+# Make sure you are in the `toronto-beaches-water-quality` rproj
 
 
 #### Workspace setup ####
