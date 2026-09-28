@@ -1,30 +1,20 @@
-# Starter folder
+# Variation in E. coli Measurements at Toronto Beaches
 
 ## Overview
 
-This repo provides students with a foundation for their own projects associated with *Telling Stories with Data*. You do not need every aspect for every paper and you should delete aspects that you do not need.
-
+This repository contains the data, code, and paper for an analysis of E. coli measurements at Toronto beaches. The analysis examines the distribution of E. coli measurements, variation across beaches, and patterns over time.
 
 ## File Structure
 
-The repo is structured as:
+The repository is organized as follows:
 
--   `data/raw_data` contains the raw data as obtained from X.
--   `data/analysis_data` contains the cleaned dataset that was constructed.
--   `model` contains fitted models. 
--   `other` contains relevant literature, details about LLM chat interactions, and sketches.
--   `paper` contains the files used to generate the paper, including the Quarto document and reference bibliography file, as well as the PDF of the paper. 
--   `scripts` contains the R scripts used to simulate, download and clean data.
+- `data/00-simulated_data` contains the simulated dataset.
+- `data/01-raw_data` contains the raw data downloaded from Open Data Toronto.
+- `data/02-analysis_data` contains the cleaned dataset used in the analysis.
+- `other` contains supporting materials, including sketches and LLM documentation.
+- `paper` contains the Quarto source file, bibliography, and rendered paper.
+- `scripts` contains the R scripts used to simulate, download, clean, test, and explore the data.
 
+## Statement on LLM Usage
 
-## Statement on LLM usage
-
-Aspects of the code were written with the help of Codriver. The abstract and introduction were written with the help of ChatHorse and the entire chat history is available in inputs/llms/usage.txt.
-
-## Some checks
-
-- [ ] Change the rproj file name so that it's not starter_folder.Rproj
-- [ ] Change the README title so that it's not Starter folder
-- [ ] Remove files that you're not using
-- [ ] Update comments in R scripts
-- [ ] Remove this checklist
+ChatGPT was used to assist with aspects of R code, testing, data visualization, and writing. The complete relevant chat history is available in `other/llm_usage/usage.txt`.
