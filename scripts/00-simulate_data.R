@@ -29,9 +29,11 @@ sites <- c(
   "3W"
 )
 
+simulated_beach_id <- sample(1:4, size = 100, replace = TRUE)
+
 analysis_data <- tibble(
-  beachId = sample(1:4, size = 100, replace = TRUE),
-  beachName = sample(beaches, size = 100, replace = TRUE),
+  beachId = simulated_beach_id,
+  beachName = beaches[simulated_beach_id],
   siteName = sample(sites, size = 100, replace = TRUE),
   collectionDate = sample(
     seq(as.Date("2026-06-01"), as.Date("2026-09-07"), by = "day"),
@@ -40,7 +42,6 @@ analysis_data <- tibble(
   ),
   eColi = sample(1:200, size = 100, replace = TRUE)
 )
-
 
 
 #### Save data ####
