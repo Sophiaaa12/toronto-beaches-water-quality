@@ -39,7 +39,7 @@ The remainder of this paper is structured as follows. @sec-data describes the To
 
 ## Overview
 
-The Toronto Beaches Water Quality dataset is provided through the City of Toronto Open Data Portal [@torontobeaches]. During the summer swimming season, the City collects water samples from supervised public beaches, and Toronto Public Health analyzes the samples for E. coli as part of its monitoring of beach water quality [@torontobeaches]. These measurements provide information used to assess recreational water conditions at Toronto beaches.
+The Toronto Beaches Water Quality dataset is provided through the City of Toronto Open Data Portal [@torontobeaches]. The data were downloaded reproducibly using the `opendatatoronto` R package [@opendatatoronto]. During the summer swimming season, the City collects water samples from supervised public beaches, and Toronto Public Health analyzes the samples for E. coli as part of its monitoring of beach water quality [@torontobeaches]. These measurements provide information used to assess recreational water conditions at Toronto beaches.
 
 The data used in this analysis contain 102,534 observations collected between June 3, 2007 and September 16, 2026 across 10 Toronto beaches. Each observation records a beach identifier, beach name, sampling site, collection date, and E. coli measurement. The original dataset also contains an observation identifier and geographic information, which are not required for this analysis and were removed during data cleaning. The analysis was conducted using R [@R], the `tidyverse` [@tidyverse], and the `here` package [@here]. Figures were produced using `ggplot2` [@ggplot], and tables were produced using `tinytable` [@tinytable].
 
@@ -195,7 +195,7 @@ analysis_data |>
   theme_minimal()
 ```
 
-@fig-time-distribution shows substantial variation in E. coli measurements throughout the study period. Most observations are concentrated at relatively low values, while higher measurements occur in each year. An especially extreme observation occurs in 2009. Overall, there is no clear sustained upward or downward pattern in the observed measurements over time.
+@fig-time-distribution shows substantial variation in E. coli measurements throughout the study period. Most observations are concentrated at relatively low values, while higher measurements occur in each year. There is an extreme observation point appeared around 2009, almost reaching $10^7$. Overall, there is no clear sustained upward or downward pattern in the observed measurements over time.
 
 <!-- ## Outcome variables -->
 
